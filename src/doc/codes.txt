@@ -5,39 +5,27 @@ import { loadJSON } from 'src/shared/utils/json-loader.helper';
 
 @Injectable()
 export class ContractsService {
-  private contracts: { [key: string]: ethers.Contract };
+  private contract: ethers.Contract;
   private provider: ethers.providers.JsonRpcProvider;
   private wallet: ethers.Wallet;
 
   constructor() {
     this.provider = new ethers.providers.JsonRpcProvider(envs.ETH_RPC_URL);
     this.wallet = new ethers.Wallet(envs.PRIVATE_KEY, this.provider);
-
-    const contractAddresses = {
-      // AccessControl: envs.ACCESS_CONTROL_ADDRESS,
-      BuildingToken: envs.BUILDING_TOKEN_ADDRESS,
-      CommissionManager: envs.COMMISSION_MANAGER_ADDRESS,
-      ContractManager: envs.CONTRACT_MANAGER_ADDRESS,
-      Marketplace: envs.MARKETPLACE_ADDRESS,
-      PropertyMarketplace: envs.PROPERTY_MARKETPLACE_ADDRESS,
-      TokenFactory: envs.TOKEN_FACTORY_ADDRESS,
-      TransactionHandler: envs.TRANSACTION_HANDLER_ADDRESS,
-    };
-
-    const contractABIs = loadJSON();
-
-    this.contracts = {};
-    for (const [name, address] of Object.entries(contractAddresses)) {
-      this.contracts[name] = new ethers.Contract(address, contractABIs[name].abi, this.wallet);
-    }
+    const contractAddress = envs.CONTRACT_ADDRESS;
+    const contractABI = loadJSON().abi;
 
     console.log('ETH_RPC_URL:', envs.ETH_RPC_URL);
-    console.log('Contract Addresses:', contractAddresses);
-    // console.log('Contract ABIs:', contractABIs);
-    for (const [name, contract] of Object.entries(this.contracts)) {
-      // console.log(`Métodos disponibles en el contrato ${name}:`, Object.keys(contract.functions));
+    console.log('Contract Address:', contractAddress);
+    console.log('Contract ABI:', contractABI);
+
+    this.contract = new ethers.Contract(contractAddress, contractABI, this.wallet);
+
+    if (this.contract && this.contract.functions) {
+      console.log('Métodos disponibles en el contrato:', Object.keys(this.contract.functions));
+    } else {
+      console.error('El contrato no está correctamente inicializado.');
     }
-  
   }
 
   async getSignerAddress(): Promise<string> {
@@ -45,7 +33,6 @@ export class ContractsService {
     console.log('address', address);
     return address;
   }
-
   async getBalance(): Promise<{ address: string; balance: string }> {
     const balance = await this.wallet.getBalance();
     console.log('address:', this.wallet.address);
@@ -56,9 +43,10 @@ export class ContractsService {
     };
   }
 
+
   async getPlatformCommissionPercentage(): Promise<number> {
     try {
-      const result = await this.contracts.ContractManager.platformCommissionPercentage();
+      const result = await this.contract.platformCommissionPercentage();
       console.log('result', result);
       return result.toNumber();
     } catch (error) {
@@ -69,7 +57,7 @@ export class ContractsService {
 
   async getPromoterCommissionPercentage(): Promise<number> {
     try {
-      const result = await this.contracts.ContractManager.promoterCommissionPercentage();
+      const result = await this.contract.promoterCommissionPercentage();
       console.log('getPromoterCommissionPercentage', result);
       return result.toNumber();
     } catch (error) {
@@ -80,7 +68,7 @@ export class ContractsService {
 
   async setPlatformCommissionPercentage(percentage: number): Promise<any> {
     try {
-      const transaction = await this.contracts.ContractManager.setPlatformCommissionPercentage(percentage);
+      const transaction = await this.contract.setPlatformCommissionPercentage(percentage);
       await transaction.wait();
       return transaction;
     } catch (error) {
@@ -91,7 +79,7 @@ export class ContractsService {
 
   async setPromoterCommissionPercentage(percentage: number): Promise<any> {
     try {
-      const transaction = await this.contracts.ContractManager.setPromoterCommissionPercentage(percentage);
+      const transaction = await this.contract.setPromoterCommissionPercentage(percentage);
       await transaction.wait();
       return transaction;
     } catch (error) {
@@ -100,11 +88,12 @@ export class ContractsService {
     }
   }
 
+
   async createProperty(price: number): Promise<any> {
     try {
       const propertyId = ethers.utils.hexlify(ethers.utils.randomBytes(16)); // Generar un bytes16 válido
       const proof = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(propertyId)); // Generar un hash a partir del propertyId
-      const transaction = await this.contracts.PropertyMarketplace.createProperty(price, proof);
+      const transaction = await this.contract.createProperty(price, proof);
       await transaction.wait();
       console.log('createProperty', transaction);
       return transaction;
@@ -116,7 +105,7 @@ export class ContractsService {
 
   async comprarPropiedad(propiertieId: string, proof: string, promoter: string, value: ethers.BigNumber): Promise<any> {
     try {
-      const transaction = await this.contracts.PropertyMarketplace.comprarPropiedad(propiertieId, proof, promoter, { value });
+      const transaction = await this.contract.comprarPropiedad(propiertieId, proof, promoter, { value });
       await transaction.wait();
       console.log('comprarPropiedad', transaction);
       return transaction;
@@ -128,7 +117,7 @@ export class ContractsService {
 
   async transferirPropiedad(propertieHash: string, to: string): Promise<any> {
     try {
-      const transaction = await this.contracts.PropertyMarketplace.transferirPropiedad(propertieHash, to);
+      const transaction = await this.contract.transferirPropiedad(propertieHash, to);
       await transaction.wait();
       console.log('transferirPropiedad', transaction);
       return transaction;
@@ -138,9 +127,10 @@ export class ContractsService {
     }
   }
 
+
   async getPropertieCount(): Promise<number> {
     try {
-      const result = await this.contracts.PropertyMarketplace.getPropertieCount();
+      const result = await this.contract.getPropertieCount();
       console.log('getPropertieCount', result);
       return result.toNumber();
     } catch (error) {
@@ -151,12 +141,12 @@ export class ContractsService {
 
   async getPropertieCountByOwner(ownerAddress: string): Promise<number> {
     try {
-      const propertyCount = await this.contracts.PropertyMarketplace.getPropertieCount();
+      const propertyCount = await this.contract.getPropertieCount();
       let count = 0;
 
       for (let i = 0; i < propertyCount.toNumber(); i++) {
-        const propertyHash = await this.contracts.PropertyMarketplace.getPropertieHashAtIndex(i);
-        const property = await this.contracts.PropertyMarketplace.getPropertieByHash(propertyHash);
+        const propertyHash = await this.contract.getPropertieHashAtIndex(i);
+        const property = await this.contract.getPropertieByHash(propertyHash);
 
         if (property.owner.toLowerCase() === ownerAddress.toLowerCase()) {
           count++;
@@ -169,10 +159,9 @@ export class ContractsService {
       throw error;
     }
   }
-
   async getPropertieHashAtIndex(index: number): Promise<string> {
     try {
-      const result = await this.contracts.PropertyMarketplace.getPropertieHashAtIndex(index);
+      const result = await this.contract.getPropertieHashAtIndex(index);
       console.log('getPropertieHashAtIndex', result);
       return result;
     } catch (error) {
@@ -183,7 +172,7 @@ export class ContractsService {
 
   async getPropertieByHash(propertieHash: string): Promise<any> {
     try {
-      const result = await this.contracts.PropertyMarketplace.getPropertieByHash(propertieHash);
+      const result = await this.contract.getPropertieByHash(propertieHash);
       console.log('getPropertieByHash', result);
       return result;
     } catch (error) {
@@ -191,4 +180,52 @@ export class ContractsService {
       throw error;
     }
   }
+
+  
 }
+
+
+import * as contractAccessControl from '../../contracts/abi/AccessControl.json';
+import * as contractBuildingToken from '../../contracts/abi/BuildingToken.json';
+import * as contractCommissionManager from '../../contracts/abi/CommissionManager.json';
+import * as contractContractManager from '../../contracts/abi/ContractManager.json';
+import * as contractMarketplace from '../../contracts/abi/Marketplace.json';
+import * as contractPropertyMarketplace from '../../contracts/abi/PropertyMarketplace.json';
+import * as contractTokenFactory from '../../contracts/abi/TokenFactory.json';
+import * as contractTransactionHandler from '../../contracts/abi/TransactionHandler.json';
+
+export const loadJSON = (): any => {
+  const contracts = {
+    AccessControl: contractAccessControl,
+    BuildingToken: contractBuildingToken,
+    CommissionManager: contractCommissionManager,
+    ContractManager: contractContractManager,
+    Marketplace: contractMarketplace,
+    PropertyMarketplace: contractPropertyMarketplace,
+    TokenFactory: contractTokenFactory,
+    TransactionHandler: contractTransactionHandler,
+  };
+
+  console.log('ABI AccessControl:', contracts.AccessControl.abi); // Imprimir los ABI para verificar
+  console.log('ABI BuildingToken:', contracts.BuildingToken.abi); // Imprimir los ABI para verificar
+  console.log('ABI CommissionManager:', contracts.CommissionManager.abi); // Imprimir los ABI para verificar
+  console.log('ABI ContractManager:', contracts.ContractManager.abi); // Imprimir los ABI para verificar
+  console.log('ABI Marketplace:', contracts.Marketplace.abi); // Imprimir los ABI para verificar
+  console.log('ABI PropertyMarketplace:', contracts.PropertyMarketplace.abi); // Imprimir los ABI para verificar
+  console.log('ABI TokenFactory:', contracts.TokenFactory.abi); // Imprimir los ABI para verificar
+  console.log('ABI TransactionHandler:', contracts.TransactionHandler.abi); // Imprimir los ABI para verificar
+
+
+  return contracts;
+};
+
+
+
+import * as contract from '../../contracts/abi/PropertyMarketplace.json';
+
+export const loadJSON = (): any => {
+  // console.log('=========',contract)
+  console.log('ABI cargado:', contract.abi); // Imprimir el ABI para verificar
+
+  return contract;
+};

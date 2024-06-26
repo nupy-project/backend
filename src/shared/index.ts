@@ -13,3 +13,4 @@ export * from './decorators/paginate-v2.decorator'
 
 export * from './middleware/pagination-v2.middleware'
 export * from './middleware/paginator.middleware'
+export * from './event-mail/event-mail.module'

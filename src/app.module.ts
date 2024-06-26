@@ -12,6 +12,8 @@ import { UserModule } from './user/user.module';
 // import { UserModule } from './user/user.module';
 // import { PropertiesModule } from './properties/properties.module';
 import { ContractsModule } from './contracts/contracts.module';
+import { PropertiesModule } from './properties/properties.module';
+import { OrderModule } from './order/order.module';
 
 
 @Module({
@@ -32,8 +34,9 @@ import { ContractsModule } from './contracts/contracts.module';
     }),
     AuthModule,
     UserModule,
-    // PropertiesModule,
-    ContractsModule, 
+    PropertiesModule,
+    ContractsModule,
+    OrderModule, 
     // SellerModule, 
     // BuyerModule
   ],

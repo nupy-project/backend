@@ -5,12 +5,18 @@ import * as joi from 'joi';
 interface EnvVars {
   PORT: number;
   DATABASE_URL: string;
-  JWT_SECRET:string
-  ETH_RPC_URL:string
-  CONTRACT_ADDRESS:string
+  JWT_SECRET: string;
+  ETH_RPC_URL: string;
+  CONTRACT_ADDRESS: string;
   PRIVATE_KEY: string;
-
-
+  ACCESS_CONTROL_ADDRESS: string;
+  BUILDING_TOKEN_ADDRESS: string;
+  COMMISSION_MANAGER_ADDRESS: string;
+  CONTRACT_MANAGER_ADDRESS: string;
+  MARKETPLACE_ADDRESS: string;
+  PROPERTY_MARKETPLACE_ADDRESS: string;
+  TOKEN_FACTORY_ADDRESS: string;
+  TRANSACTION_HANDLER_ADDRESS: string;
 }
 
 const envsSchema = joi
@@ -21,9 +27,14 @@ const envsSchema = joi
     ETH_RPC_URL: joi.string().required(),
     CONTRACT_ADDRESS: joi.string().required(),
     PRIVATE_KEY: joi.string().required(),
-
-
-
+    ACCESS_CONTROL_ADDRESS: joi.string().required(),
+    BUILDING_TOKEN_ADDRESS: joi.string().required(),
+    COMMISSION_MANAGER_ADDRESS: joi.string().required(),
+    CONTRACT_MANAGER_ADDRESS: joi.string().required(),
+    MARKETPLACE_ADDRESS: joi.string().required(),
+    PROPERTY_MARKETPLACE_ADDRESS: joi.string().required(),
+    TOKEN_FACTORY_ADDRESS: joi.string().required(),
+    TRANSACTION_HANDLER_ADDRESS: joi.string().required(),
   })
   .unknown(true);
 
@@ -44,6 +55,12 @@ export const envs = {
   ETH_RPC_URL: envVars.ETH_RPC_URL,
   CONTRACT_ADDRESS: envVars.CONTRACT_ADDRESS,
   PRIVATE_KEY: envVars.PRIVATE_KEY,
-
-
+  ACCESS_CONTROL_ADDRESS: envVars.ACCESS_CONTROL_ADDRESS,
+  BUILDING_TOKEN_ADDRESS: envVars.BUILDING_TOKEN_ADDRESS,
+  COMMISSION_MANAGER_ADDRESS: envVars.COMMISSION_MANAGER_ADDRESS,
+  CONTRACT_MANAGER_ADDRESS: envVars.CONTRACT_MANAGER_ADDRESS,
+  MARKETPLACE_ADDRESS: envVars.MARKETPLACE_ADDRESS,
+  PROPERTY_MARKETPLACE_ADDRESS: envVars.PROPERTY_MARKETPLACE_ADDRESS,
+  TOKEN_FACTORY_ADDRESS: envVars.TOKEN_FACTORY_ADDRESS,
+  TRANSACTION_HANDLER_ADDRESS: envVars.TRANSACTION_HANDLER_ADDRESS,
 };
