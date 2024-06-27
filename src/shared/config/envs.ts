@@ -17,6 +17,7 @@ interface EnvVars {
   PROPERTY_MARKETPLACE_ADDRESS: string;
   TOKEN_FACTORY_ADDRESS: string;
   TRANSACTION_HANDLER_ADDRESS: string;
+  PROPERTY_TOKEN_ADDRESS: string;
 }
 
 const envsSchema = joi
@@ -35,6 +36,10 @@ const envsSchema = joi
     PROPERTY_MARKETPLACE_ADDRESS: joi.string().required(),
     TOKEN_FACTORY_ADDRESS: joi.string().required(),
     TRANSACTION_HANDLER_ADDRESS: joi.string().required(),
+    PROPERTY_TOKEN_ADDRESS: joi.string().required(),
+    
+
+    
   })
   .unknown(true);
 
@@ -63,4 +68,5 @@ export const envs = {
   PROPERTY_MARKETPLACE_ADDRESS: envVars.PROPERTY_MARKETPLACE_ADDRESS,
   TOKEN_FACTORY_ADDRESS: envVars.TOKEN_FACTORY_ADDRESS,
   TRANSACTION_HANDLER_ADDRESS: envVars.TRANSACTION_HANDLER_ADDRESS,
+  PROPERTY_TOKEN_ADDRESS: envVars.PROPERTY_TOKEN_ADDRESS,
 };
