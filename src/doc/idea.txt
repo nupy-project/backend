@@ -1,0 +1,32 @@
+Me parece una estructura de roles bien definida y adecuada para gestionar diferentes niveles de acceso y permisos en la plataforma. Tener roles específicos como `seller` y `buyer` para los usuarios, y roles administrativos como `admin`, `super-admin` y `super-admin-ceo` para ti, permite una clara diferenciación de responsabilidades y accesos.
+
+### Roles y Acciones
+
+1. **Buyer**
+   - **Ver propiedades**: Consultar la lista de propiedades disponibles.
+   - **Comprar propiedades**: Realizar transacciones para adquirir propiedades.
+   - **Ver historial de compras**: Consultar su historial de transacciones.
+   - **Comentar y valorar propiedades**: Opcionalmente, dejar comentarios y valoraciones sobre las propiedades adquiridas.
+
+2. **Seller**
+   - **Listar propiedades**: Crear y publicar propiedades para la venta.
+   - **Ver sus propiedades listadas**: Consultar las propiedades que ha publicado.
+   - **Actualizar propiedades**: Modificar detalles de las propiedades listadas.
+   - **Eliminar propiedades**: Quitar propiedades del listado.
+
+3. **Admin**
+   - **Gestionar usuarios**: Agregar, modificar o eliminar usuarios (buyers y sellers).
+   - **Moderación de contenido**: Revisar y moderar comentarios y valoraciones de propiedades.
+   - **Ver reportes y estadísticas**: Acceder a reportes y estadísticas generales de la plataforma.
+   - **Aprobar/Desaprobar propiedades listadas**: Controlar qué propiedades aparecen en la plataforma.
+
+4. **Super-Admin**
+   - **Todas las acciones del Admin**: Tiene todos los permisos de un `admin`.
+   - **Gestionar admins**: Agregar, modificar o eliminar `admins`.
+   - **Acceso a configuraciones avanzadas**: Cambiar configuraciones avanzadas de la plataforma.
+
+5. **Super-Admin-CEO**
+   - **Todas las acciones del Super-Admin**: Tiene todos los permisos de un `super-admin`.
+   - **Control total sobre la plataforma**: Tiene acceso total a todas las funcionalidades y configuraciones de la plataforma.
+   - **Decisiones estratégicas**: Toma de decisiones estratégicas y supervisión global de la plataforma.
+

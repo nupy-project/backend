@@ -1,11 +1,11 @@
-import * as contractAccessControl from '../../contracts/abi/AccessControl.json';
-import * as contractBuildingToken from '../../contracts/abi/BuildingToken.json';
-import * as contractCommissionManager from '../../contracts/abi/CommissionManager.json';
-import * as contractContractManager from '../../contracts/abi/ContractManager.json';
-import * as contractMarketplace from '../../contracts/abi/Marketplace.json';
-import * as contractPropertyMarketplace from '../../contracts/abi/PropertyMarketplace.json';
-import * as contractTokenFactory from '../../contracts/abi/TokenFactory.json';
-import * as contractTransactionHandler from '../../contracts/abi/TransactionHandler.json';
+import * as contractAccessControl from '../../features/contracts/abi/AccessControl.json';
+import * as contractBuildingToken from '../../features/contracts/abi/BuildingToken.json';
+import * as contractCommissionManager from '../../features/contracts/abi/CommissionManager.json';
+import * as contractContractManager from '../../features/contracts/abi/ContractManager.json';
+import * as contractMarketplace from '../../features/contracts/abi/Marketplace.json';
+import * as contractPropertyMarketplace from '../../features/contracts/abi/PropertyMarketplace.json';
+import * as contractTokenFactory from '../../features/contracts/abi/TokenFactory.json';
+import * as contractTransactionHandler from '../../features/contracts/abi/TransactionHandler.json';
 
 export const loadJSON = (): any => {
   const contracts = {

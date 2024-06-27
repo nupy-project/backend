@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Module } from '@nestjs/common';
-import { AuthModule } from './auth/auth.module';
 // import { SellerModule } from './seller/seller.module';
 // import { BuyerModule } from './buyer/buyer.module';
 import { ConfigModule } from '@nestjs/config';
@@ -8,12 +7,14 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MongooseModule } from '@nestjs/mongoose';
 import { envs } from './shared';
-import { UserModule } from './user/user.module';
-// import { UserModule } from './user/user.module';
-// import { PropertiesModule } from './properties/properties.module';
-import { ContractsModule } from './contracts/contracts.module';
-import { PropertiesModule } from './properties/properties.module';
-import { OrderModule } from './order/order.module';
+import { AuthModule } from './features/auth/auth.module';
+// import { BuildingTokenModule } from './features/building-token/building-token.module';
+// import { CommissionManagerModule } from './features/commission-manager/commission-manager.module';
+// import { ContractManagerModule } from './features/contract-manager/contract-manager.module';
+// import { MarketplaceModule } from './features/marketplace/marketplace.module';
+// import { PropertyTokenModule } from './features/property-token/property-token.module';
+// import { TokenFactoryModule } from './features/token-factory/token-factory.module';
+// import { TransactionHandlerModule } from './features/transaction-handler/transaction-handler.module';
 
 
 @Module({
@@ -33,10 +34,17 @@ import { OrderModule } from './order/order.module';
       },
     }),
     AuthModule,
-    UserModule,
-    PropertiesModule,
-    ContractsModule,
-    OrderModule, 
+    // BuildingTokenModule,
+    // CommissionManagerModule,
+    // ContractManagerModule,
+    // MarketplaceModule,
+    // TokenFactoryModule,
+    // TransactionHandlerModule,
+    // PropertyTokenModule,
+    // UserModule,
+    // PropertiesModule,
+    // ContractsModule,
+    // OrderModule, 
     // SellerModule, 
     // BuyerModule
   ],
