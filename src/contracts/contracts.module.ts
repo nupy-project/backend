@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ContractsService } from './contracts.service';
 import { ConfigModule } from '@nestjs/config';
-import { ContractsController } from './contracts.controller';
+import { ContractsController } from './controllers/contracts.controller';
 // import { AccessControlService } from './services/access-control/access-control.service';
 // import { BuildingTokenService } from './services/building-token/building-token.service';
 // import { CommissionManagerService } from './services/commission-manager/commission-manager.service';

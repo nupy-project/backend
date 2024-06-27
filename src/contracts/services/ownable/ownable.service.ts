@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ethers } from 'ethers';
+import { IOwnable } from 'src/contracts';
 import { envs } from 'src/shared';
 import { loadJSON } from 'src/shared/utils/json-loader.helper';
-import { IOwnable } from './interfaces/iownable.interface';
 
 @Injectable()
 export class OwnableService {
@@ -14,7 +14,7 @@ export class OwnableService {
     this.provider = new ethers.providers.JsonRpcProvider(envs.ETH_RPC_URL);
     this.wallet = new ethers.Wallet(envs.PRIVATE_KEY, this.provider);
 
-    const contractAddress = envs.OWNABLE_ADDRESS;
+    const contractAddress = envs.CONTRACT_ADDRESS;
     const contractABI = loadJSON().Ownable.abi;
 
     this.contract = new ethers.Contract(contractAddress, contractABI, this.wallet) as unknown as IOwnable;

@@ -11,3 +11,15 @@ export * from './interfaces/property-marketplaces.interfaces'
 export * from './interfaces/property-token.interfaces'
 export * from './interfaces/token-factory.interfaces'
 export * from './interfaces/transaction-handler.interfaces'
+
+// 
+
+
+export * from './controllers/contracts.controller'
+export * from './controllers/ownable.controller'
+export * from './controllers/propertyMarketplace.controller'
+export * from './controllers/contractManager.controller'
+export * from './controllers/commissionManager.controller'
+export * from './controllers/buildingToken.controller'
+export * from './controllers/accessControl.controller'
+
