@@ -1,6 +1,7 @@
 export * from './config/envs'
 export * from './utils/handleBcrypt'
 export * from './utils/jwt-handle'
+export * from './utils/jwt.strategy'
 export * from './utils/json-loader.helper'
 export * from './pipes/slug.pipe'
 export * from './guards/browser-agent.guard'

@@ -19,7 +19,7 @@ export class CommissionManagerService {
     this.contract = new ethers.Contract(contractAddress, contractABI, this.wallet) as unknown as ICommissionManager;
 
     if (this.contract) {
-      console.log('Métodos disponibles en el contrato CommissionManager:', Object.keys(this.contract));
+      // console.log('Métodos disponibles en el contrato CommissionManager:', Object.keys(this.contract));
     } else {
       console.error('El contrato CommissionManager no está correctamente inicializado.');
     }

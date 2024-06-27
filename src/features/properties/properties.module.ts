@@ -5,8 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PropertiesService } from './properties.service';
 import { PropertiesController } from './properties.controller';
 import { ContractsModule } from '../contracts/contracts.module';
-import { PropertyModel, PropertySchema } from './models/property.model';
 import { UserModel, UserSchema } from '../user/models/user.schema';
+import { PropertyModel, PropertySchema } from '../token-factory/model/properties-tokenFactory.schemes';
 
 @Module({
   imports: [

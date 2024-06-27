@@ -3,10 +3,9 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
-import { JwtHandle } from 'src/shared';
-import { JwtStrategy } from './strategy/jwt.strategy';
+import { JwtHandle, JwtStrategy } from 'src/shared';
 import { UserModel, UserSchema } from '../user/models/user.schema';
-// import { AuthController } from './auth.controller';
+import { Seller, SellerSchema } from '../seller/model/seller.scheme';
 
 @Module({
   imports: [
@@ -19,25 +18,12 @@ import { UserModel, UserSchema } from '../user/models/user.schema';
       },
     }),
     MongooseModule.forFeature([
-      {
-        name: UserModel.name,
-        schema: UserSchema,
-      },
+      { name: UserModel.name, schema: UserSchema },
+      { name: Seller.name, schema: SellerSchema }
     ]),
-    // ClientsModule.register([
-    //   {
-    //     name: 'MAIL_SERVICE',
-    //     transport: Transport.REDIS,
-    //     options: {
-    //       host: 'localhost',
-    //       port: 6379
-    //     },
-    //   },
-    // ]),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, JwtHandle],
   exports: [JwtHandle],
-
 })
 export class AuthModule {}

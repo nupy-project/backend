@@ -31,8 +31,8 @@ export class ContractsService {
       this.contracts[name] = new ethers.Contract(address, contractABIs[name].abi, this.wallet);
     }
 
-    console.log('ETH_RPC_URL:', envs.ETH_RPC_URL);
-    console.log('Contract Addresses:', contractAddresses);
+    // console.log('ETH_RPC_URL:', envs.ETH_RPC_URL);
+    // console.log('Contract Addresses:', contractAddresses);
     // console.log('Contract ABIs:', contractABIs);
     for (const [name, contract] of Object.entries(this.contracts)) {
       // console.log(`Métodos disponibles en el contrato ${name}:`, Object.keys(contract.functions));

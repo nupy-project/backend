@@ -4,8 +4,8 @@ import { OrderController } from './order.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { OrderSchema } from './models/order.schemes';
-import { PropertyModel, PropertySchema } from '../properties/models/property.model';
 import { UserModel, UserSchema } from '../user/models/user.schema';
+import { PropertyModel, PropertySchema } from '../token-factory/model/properties-tokenFactory.schemes';
 
 @Module({
   imports: [

@@ -19,7 +19,7 @@ export class ContractManagerService {
     this.contract = new ethers.Contract(contractAddress, contractABI, this.wallet) as unknown as IContractManager;
 
     if (this.contract) {
-      console.log('Métodos disponibles en el contrato ContractManager:', Object.keys(this.contract));
+      // console.log('Métodos disponibles en el contrato ContractManager:', Object.keys(this.contract));
     } else {
       console.error('El contrato ContractManager no está correctamente inicializado.');
     }

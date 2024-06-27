@@ -18,6 +18,8 @@ interface EnvVars {
   TOKEN_FACTORY_ADDRESS: string;
   TRANSACTION_HANDLER_ADDRESS: string;
   PROPERTY_TOKEN_ADDRESS: string;
+  ADMIN_WALLET_ADDRESS: string; // Agregado
+  ETH_USD_EXCHANGE_RATE: number; // Agregado
 }
 
 const envsSchema = joi
@@ -37,9 +39,8 @@ const envsSchema = joi
     TOKEN_FACTORY_ADDRESS: joi.string().required(),
     TRANSACTION_HANDLER_ADDRESS: joi.string().required(),
     PROPERTY_TOKEN_ADDRESS: joi.string().required(),
-    
-
-    
+    ADMIN_WALLET_ADDRESS: joi.string().required(), // Agregado
+    ETH_USD_EXCHANGE_RATE: joi.number().required(), // Agregado
   })
   .unknown(true);
 
@@ -69,4 +70,6 @@ export const envs = {
   TOKEN_FACTORY_ADDRESS: envVars.TOKEN_FACTORY_ADDRESS,
   TRANSACTION_HANDLER_ADDRESS: envVars.TRANSACTION_HANDLER_ADDRESS,
   PROPERTY_TOKEN_ADDRESS: envVars.PROPERTY_TOKEN_ADDRESS,
+  ADMIN_WALLET_ADDRESS: envVars.ADMIN_WALLET_ADDRESS, // Agregado
+  ETH_USD_EXCHANGE_RATE: envVars.ETH_USD_EXCHANGE_RATE, // Agregado
 };

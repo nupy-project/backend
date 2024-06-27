@@ -14,12 +14,14 @@ export class RolesGuard implements CanActivate {
       context.getHandler(),
     );
 
-    const req = context.getArgByIndex(0);
+    if (!getRolMeta) {
+      return true; // Si no hay roles definidos, permite el acceso
+    }
+
+    const req = context.switchToHttp().getRequest();
     const { roles } = req.user;
 
-    //TODO array roles que tiene el usuario ['admin'] DB
-    //TODO array roles permitidos para este controlador ['admin','manager']
-
+    // Verificar si el usuario tiene alguno de los roles permitidos
     const isAllow = roles.some((rol) => getRolMeta.includes(rol));
     return isAllow;
   }

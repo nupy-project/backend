@@ -11,10 +11,18 @@ import { AuthModule } from './features/auth/auth.module';
 // import { BuildingTokenModule } from './features/building-token/building-token.module';
 // import { CommissionManagerModule } from './features/commission-manager/commission-manager.module';
 // import { ContractManagerModule } from './features/contract-manager/contract-manager.module';
+// import { TransactionHandlerModule } from './features/transaction-handler/transaction-handler.module';
+import { SelerModule } from './features/seller/seller.module';
+// import { MarketplaceModule } from './features/marketplace/marketplace.module';
+// import { BuildingTokenModule } from './features/building-token/building-token.module';
+// import { CommissionManagerModule } from './features/commission-manager/commission-manager.module';
+// import { ContractManagerModule } from './features/contract-manager/contract-manager.module';
 // import { MarketplaceModule } from './features/marketplace/marketplace.module';
 // import { PropertyTokenModule } from './features/property-token/property-token.module';
 // import { TokenFactoryModule } from './features/token-factory/token-factory.module';
 // import { TransactionHandlerModule } from './features/transaction-handler/transaction-handler.module';
+// import { SalesModule } from './features/sales/sales.module';
+// import { DetailOrdersModule } from './features/detail-orders/detail-orders.module';
 
 
 @Module({
@@ -40,12 +48,14 @@ import { AuthModule } from './features/auth/auth.module';
     // MarketplaceModule,
     // TokenFactoryModule,
     // TransactionHandlerModule,
+    // SalesModule,
+    // DetailOrdersModule,
     // PropertyTokenModule,
     // UserModule,
     // PropertiesModule,
     // ContractsModule,
     // OrderModule, 
-    // SellerModule, 
+    SelerModule, 
     // BuyerModule
   ],
   controllers: [],

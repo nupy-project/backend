@@ -1,0 +1,116 @@
+Perfecto, usando Elasticsearch y Kibana te dará una gran capacidad de búsqueda y visualización. Ahora volvamos a los métodos del `buyer` para asegurarnos de que estén bien definidos y completos.
+
+### Métodos Recomendados para el Buyer
+
+#### 1. Obtener Lista de Propiedades Disponibles
+- **Método**: `GET /properties`
+- **Descripción**: Permite a los compradores ver una lista de todas las propiedades disponibles para la compra.
+- **Datos Retornados**: Lista de propiedades con detalles básicos (ID, título, precio, ubicación, etc.).
+
+#### 2. Ver Detalles de una Propiedad
+- **Método**: `GET /properties/:id`
+- **Descripción**: Permite a los compradores ver los detalles específicos de una propiedad seleccionada.
+- **Datos Retornados**: Detalles completos de la propiedad (descripción, imágenes, precio, tamaño, habitaciones, baños, etc.).
+
+#### 3. Iniciar Compra de Propiedad
+- **Método**: `POST /properties/:id/buy`
+- **Descripción**: Inicia el proceso de compra para una propiedad específica. Aquí el comprador seleccionará el método de pago (PayPal, Stripe, Wallet).
+- **Datos Recibidos**: 
+  - `buyerId`: ID del comprador.
+  - `paymentMethod`: Método de pago seleccionado.
+  - `amount`: Monto de la compra.
+- **Datos Retornados**: Información sobre la transacción iniciada (estado, detalles del pago, etc.).
+
+#### 4. Confirmar Compra con PayPal
+- **Método**: `POST /payments/paypal/confirm`
+- **Descripción**: Confirma el pago realizado a través de PayPal y actualiza el estado de la propiedad y la transacción.
+- **Datos Recibidos**: 
+  - `orderId`: ID de la orden.
+  - `paypalTransactionId`: ID de la transacción de PayPal.
+- **Datos Retornados**: Confirmación de la transacción y estado de la propiedad.
+
+#### 5. Confirmar Compra con Stripe
+- **Método**: `POST /payments/stripe/confirm`
+- **Descripción**: Confirma el pago realizado a través de Stripe y actualiza el estado de la propiedad y la transacción.
+- **Datos Recibidos**: 
+  - `orderId`: ID de la orden.
+  - `stripeTransactionId`: ID de la transacción de Stripe.
+- **Datos Retornados**: Confirmación de la transacción y estado de la propiedad.
+
+#### 6. Confirmar Compra con Wallet
+- **Método**: `POST /payments/wallet/confirm`
+- **Descripción**: Procesa y confirma el pago realizado a través de la wallet en la blockchain, actualizando el estado de la propiedad y la transacción.
+- **Datos Recibidos**: 
+  - `orderId`: ID de la orden.
+  - `transactionHash`: Hash de la transacción en la blockchain.
+- **Datos Retornados**: Confirmación de la transacción y estado de la propiedad.
+
+#### 7. Obtener Historial de Compras
+- **Método**: `GET /buyers/:id/purchases`
+- **Descripción**: Permite a los compradores ver un historial de todas las propiedades compradas.
+- **Datos Retornados**: Lista de compras realizadas por el comprador con detalles básicos de cada compra (ID, propiedad, monto, estado, etc.).
+
+#### 8. Obtener Detalles de una Compra Específica
+- **Método**: `GET /buyers/:id/purchases/:purchaseId`
+- **Descripción**: Permite a los compradores ver los detalles específicos de una transacción de compra.
+- **Datos Retornados**: Detalles completos de la compra (propiedad, monto, estado, transacción, etc.).
+
+#### 9. Cancelar Compra
+- **Método**: `POST /buyers/:id/purchases/:purchaseId/cancel`
+- **Descripción**: Permite a los compradores cancelar una compra que aún no ha sido confirmada.
+- **Datos Recibidos**: 
+  - `buyerId`: ID del comprador.
+  - `purchaseId`: ID de la compra.
+- **Datos Retornados**: Confirmación de cancelación.
+
+#### 10. Revisar y Calificar Propiedad y Vendedor
+- **Método**: `POST /properties/:id/review`
+- **Descripción**: Permite a los compradores dejar una reseña y calificación sobre la propiedad y el vendedor después de completar la compra.
+- **Datos Recibidos**: 
+  - `propertyId`: ID de la propiedad.
+  - `buyerId`: ID del comprador.
+  - `rating`: Calificación (1-5 estrellas).
+  - `review`: Texto de la reseña.
+- **Datos Retornados**: Confirmación de la reseña y calificación.
+
+### Flujo de Compra con Wallet
+
+#### 1. **Creación de la Orden**
+- Cuando el comprador inicia el proceso de compra, se crea una nueva entrada en `Order` con el estado `Pending`.
+
+#### 2. **Detalles de la Orden**
+- Se crean entradas en `DetailOrder` para cada propiedad que el comprador está comprando, vinculadas a la `Order` creada.
+
+#### 3. **Procesamiento del Pago**
+- El comprador realiza el pago a través de la wallet.
+- Se maneja la transacción en la blockchain:
+  - **Verificación de Saldo**: Antes de realizar la compra, se verifica que el comprador tenga suficiente saldo en su wallet.
+  - **Transacción Blockchain**: Se crea y firma la transacción en la blockchain.
+
+#### 4. **Confirmación de la Orden**
+- Si la transacción es exitosa, se actualiza el estado de la `Order` a `Confirmed`.
+- Se crea una nueva entrada en `Sales` con el estado `Completed`, vinculada a la `Order` correspondiente y registrando detalles como el `transactionHash`.
+
+#### 5. **Actualización de Estados**
+- Los estados de las propiedades y otros detalles relevantes se actualizan en el sistema (por ejemplo, marcando la propiedad como vendida y actualizando los registros del vendedor).
+
+### Próximos Pasos
+
+1. **Definir y Documentar las APIs Necesarias**:
+   - Crear especificaciones claras para cada uno de los endpoints mencionados.
+
+2. **Implementar los Endpoints**:
+   - Desarrollar los controladores y servicios necesarios para manejar cada uno de los métodos del `buyer`.
+
+3. **Integrar Métodos de Pago**:
+   - Configurar y probar la integración con PayPal, Stripe y pagos a través de wallets.
+
+4. **Configurar Seguridad y Autenticación**:
+   - Asegurar que solo usuarios autenticados y autorizados puedan realizar compras y acceder a sus datos.
+
+5. **Implementar y Probar Flujos de Compra**:
+   - Realizar pruebas exhaustivas para asegurar que los flujos de compra sean robustos y sin errores.
+
+6. **Desarrollar la Interfaz de Usuario**:
+   - Diseñar y desarrollar las pantallas necesarias para que los compradores puedan interactuar con el sistema de manera intuitiva y eficiente.
+

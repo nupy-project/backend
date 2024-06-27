@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Schema as MongooseSchema, Types } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
 export type SellerDocument = Seller & Document;
@@ -9,10 +9,13 @@ export class Seller {
   @Prop({ unique: true, default: uuidv4 })
   id: string;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ type: String, unique: true })
+  walletAddress: string;
+
+  @Prop({ type: String, unique: true, required: true }) // Asegurarse de que el email sea requerido y único
   email: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   name: string;
 
   @Prop()
@@ -51,16 +54,20 @@ export class Seller {
   @Prop()
   totalSales: number;
 
-  @Prop({
-    default: ['seller'],
-  })
+  @Prop({ default: ['seller'] })
   roles: string[];
 
-  @Prop({ type: [{ type: String }] })
-  propertiesListed: string[]; // Array de IDs de propiedades listadas por el vendedor
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Property' }] })
+  propertiesListed: MongooseSchema.Types.ObjectId[]; // Referencia a las propiedades listadas por el vendedor
 
-  @Prop({ required: true })
-  walletAddress: string; // Dirección de la wallet del vendedor
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Sale' }] })
+  salesHistory: MongooseSchema.Types.ObjectId[];
+
+  @Prop({ type: Number, default: 0 })
+  totalPropertiesListed: number;
+
+  @Prop({ type: Number, default: 0 })
+  totalPropertiesSold: number;
 
   @Prop()
   identificationNumber: string; // Número de identificación del vendedor
@@ -70,9 +77,18 @@ export class Seller {
 
   @Prop()
   identificationDocument: string; // URL del documento de identificación subido
+  
+  @Prop()
+  walletPrivateKey:string
 
   @Prop()
   verificationStatus: string; // Estado de verificación (e.g., 'pending', 'verified', 'rejected')
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true })
+  user: Types.ObjectId; // Referencia al usuario, usando Types.ObjectId
+  
+  @Prop({ type: Number, default: 0 })
+  freePublicationsUsed: number;
 }
 
 export const SellerSchema = SchemaFactory.createForClass(Seller);

@@ -4,9 +4,10 @@ import { Model } from 'mongoose';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
 import { ContractsService } from '../contracts/contracts.service';
-import { PropertyDocument, PropertyModel } from './models/property.model';
 import { ethers } from 'ethers';
 import { UserDocument, UserModel } from '../user/models/user.schema';
+import { PropertyDocument } from '../contracts';
+import { PropertyModel } from '../token-factory/model/properties-tokenFactory.schemes';
 
 @Injectable()
 export class PropertiesService {

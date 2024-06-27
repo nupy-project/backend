@@ -22,7 +22,7 @@ export const loadJSON = (): any => {
   const printAbiNames = (contract) => {
     contract.abi.forEach(item => {
       if (item.name) {
-        console.log(`Nombre: ${item.name}`);
+        // console.log(`Nombre: ${item.name}`);
       }
     });
   };
@@ -30,26 +30,26 @@ export const loadJSON = (): any => {
   // console.log('ABI AccessControl:');
   // printAbiNames(contracts.AccessControl);
 
-  // console.log('ABI BuildingToken:');
+  // // console.log('ABI BuildingToken:');
   // printAbiNames(contracts.BuildingToken);
 
-  // console.log('ABI CommissionManager:');
+  // // console.log('ABI CommissionManager:');
   // printAbiNames(contracts.CommissionManager);
 
   // // console.log('ABI ContractManager:');
-  // // printAbiNames(contracts.ContractManager);
+  // printAbiNames(contracts.ContractManager);
 
-  // console.log('ABI Marketplace:');
+  // // console.log('ABI Marketplace:');
   // printAbiNames(contracts.Marketplace);
 
-  // console.log('ABI PropertyMarketplace:');
+  // // console.log('ABI PropertyMarketplace:');
   // printAbiNames(contracts.PropertyMarketplace);
 
   // console.log('ABI TokenFactory:');
-  // printAbiNames(contracts.TokenFactory);
+  printAbiNames(contracts.TokenFactory);
 
-  console.log('ABI TransactionHandler:');
-  printAbiNames(contracts.TransactionHandler);
+  // console.log('ABI TransactionHandler:');
+  // printAbiNames(contracts.TransactionHandler);
 
   return contracts;
 };

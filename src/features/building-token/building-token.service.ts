@@ -20,7 +20,7 @@ export class BuildingTokenService {
     this.contract = new ethers.Contract(contractAddress, contractABI, this.wallet) as unknown as IBuildingToken;
 
     if (this.contract) {
-      console.log('Métodos disponibles en el contrato BuildingToken:', Object.keys(this.contract));
+      // console.log('Métodos disponibles en el contrato BuildingToken:', Object.keys(this.contract));
     } else {
       console.error('El contrato BuildingToken no está correctamente inicializado.');
     }

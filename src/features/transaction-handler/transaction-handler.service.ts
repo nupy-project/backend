@@ -19,7 +19,7 @@ export class TransactionHandlerService {
     this.contract = new ethers.Contract(contractAddress, contractABI, this.wallet) as unknown as ITransactionHandler;
 
     if (this.contract) {
-      console.log('Métodos disponibles en el contrato TransactionHandler:', Object.keys(this.contract));
+      // console.log('Métodos disponibles en el contrato TransactionHandler:', Object.keys(this.contract));
     } else {
       console.error('El contrato TransactionHandler no está correctamente inicializado.');
     }

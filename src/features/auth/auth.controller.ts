@@ -1,32 +1,42 @@
-import { Controller,Post, Body} from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiTags } from '@nestjs/swagger';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import { LoginAuthDto } from './dto/login-auth.dto';
-
+import { UserRole } from '../user/interfaces/roles.interface';
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  // current-user
-  // password
-  // signin
-  // signout
-  // signup
-
-  @Post('signup')
-  handleRegister(@Body() registerBody: RegisterAuthDto) {
-    console.log('Received POST /auth/signup');
-    console.log('Request body:', registerBody);
-    return this.authService.register(registerBody);
-  }
   @Post('signin')
   handleLogin(@Body() loginBody: LoginAuthDto) {
-    console.log('Received POST /auth/signin');
-    console.log('Request body:', loginBody);
     return this.authService.login(loginBody);
   }
 
+  @Post('signup/buyer')
+  registerBuyer(@Body() registerBody: RegisterAuthDto) {
+    return this.authService.registerBuyer(registerBody, UserRole.Buyer);
+  }
+
+  @Post('signup/seller')
+  registerSeller(@Body() registerBody: RegisterAuthDto) {
+    return this.authService.registerSeller(registerBody, UserRole.Seller);
+  }
+
+  @Post('signup/admin')
+  registerAdmin(@Body() registerBody: RegisterAuthDto) {
+    return this.authService.registerAdmin(registerBody, UserRole.Admin);
+  }
+
+  @Post('signup/super-admin')
+  registerSuperAdmin(@Body() registerBody: RegisterAuthDto) {
+    return this.authService.registerSuperAdmin(registerBody, UserRole.SuperAdmin);
+  }
+
+  @Post('signup/super-admin-ceo')
+  registerSuperAdminCeo(@Body() registerBody: RegisterAuthDto) {
+    return this.authService.registerSuperAdminCeo(registerBody, UserRole.SuperAdminCeo);
+  }
 }

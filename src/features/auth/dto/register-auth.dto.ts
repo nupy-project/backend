@@ -1,4 +1,5 @@
-import { IsEmail, MaxLength, MinLength } from 'class-validator';
+import { IsArray, IsEmail, IsEnum, MaxLength, MinLength } from 'class-validator';
+import { UserRole } from 'src/features/user/interfaces/roles.interface';
 
 export class RegisterAuthDto {
   @IsEmail()
@@ -11,4 +12,9 @@ export class RegisterAuthDto {
   @MinLength(6)
   @MaxLength(20)
   password: string;
+
+
+  @IsArray()
+  @IsEnum(UserRole, { each: true })
+  roles: UserRole[];
 }
