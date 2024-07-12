@@ -1,86 +1,112 @@
-### Proceso de Venta y Compra
 
-#### 1. **Registro y Autenticación**
+# Contenido
+sections = [
+    {
+        "title": "1. Gestión de Usuarios y Roles",
+        "body": (
+            "Descripción: Permite la administración de los usuarios de la plataforma, asignándoles roles específicos que determinan "
+            "su nivel de acceso y permisos.\n\n"
+            "Procesos:\n"
+            "- Crear Usuario: Añadir nuevos usuarios al sistema.\n"
+            "- Editar Usuario: Modificar la información de usuarios existentes.\n"
+            "- Eliminar Usuario: Eliminar usuarios del sistema.\n"
+            "- Asignar Roles: Designar roles específicos a los usuarios (administrador, operador, usuario regular).\n\n"
+            "Ventajas:\n"
+            "- Control centralizado de los usuarios.\n"
+            "- Asignación de permisos según roles, mejorando la seguridad.\n"
+            "- Fácil gestión de la base de usuarios."
+        )
+    },
+    {
+        "title": "2. Gestión de Transacciones",
+        "body": (
+            "Descripción: Facilita la administración y monitoreo de todas las transacciones que se realizan en la plataforma.\n\n"
+            "Procesos:\n"
+            "- Visualización de Transacciones: Acceso a un dashboard para ver todas las transacciones.\n"
+            "- Filtrado y Búsqueda: Herramientas para filtrar transacciones por criterios específicos (fecha, usuario, monto, tipo, etc.).\n"
+            "- Detalles de Transacciones: Visualización de información detallada de cada transacción.\n\n"
+            "Ventajas:\n"
+            "- Monitoreo en tiempo real de las transacciones.\n"
+            "- Facilita la auditoría y el seguimiento.\n"
+            "- Mejora en la detección de transacciones fraudulentas."
+        )
+    },
+    {
+        "title": "3. Gestión de Pagos y Cobros",
+        "body": (
+            "Descripción: Administración de todos los pagos y cobros realizados a través de la plataforma, incluyendo reembolsos y facturación.\n\n"
+            "Procesos:\n"
+            "- Procesamiento de Pagos: Gestión de pagos realizados y recibidos.\n"
+            "- Reembolsos y Disputas: Administración de reembolsos y resolución de disputas.\n"
+            "- Facturación: Generación y envío de facturas a los usuarios.\n\n"
+            "Ventajas:\n"
+            "- Automatización de procesos de pago.\n"
+            "- Mejora en la gestión de disputas y reembolsos.\n"
+            "- Generación de facturas de manera eficiente."
+        )
+    },
+    {
+        "title": "4. Reportes y Análisis",
+        "body": (
+            "Descripción: Herramientas para la generación de reportes financieros, operacionales y de usuarios, así como para el análisis de datos.\n\n"
+            "Procesos:\n"
+            "- Generación de Reportes: Creación de reportes detallados sobre diversos aspectos de la plataforma.\n"
+            "- Análisis de Datos: Análisis del rendimiento de la plataforma y las transacciones.\n\n"
+            "Ventajas:\n"
+            "- Información detallada para la toma de decisiones.\n"
+            "- Análisis de tendencias y patrones.\n"
+            "- Identificación de áreas de mejora."
+        )
+    },
+    {
+        "title": "5. Configuración del Sistema",
+        "body": (
+            "Descripción: Ajustes y configuración de los parámetros básicos del sistema, incluyendo integraciones y opciones de seguridad.\n\n"
+            "Procesos:\n"
+            "- Ajustes Generales: Configuración de parámetros como moneda, idioma y zona horaria.\n"
+            "- Integraciones: Administración de integraciones con otros servicios y APIs.\n"
+            "- Seguridad: Configuración de opciones de seguridad, como autenticación de dos factores y políticas de contraseña.\n\n"
+            "Ventajas:\n"
+            "- Personalización de la plataforma según las necesidades.\n"
+            "- Integración con otros servicios para una mayor funcionalidad.\n"
+            "- Mejora en la seguridad de la plataforma."
+        )
+    },
+    {
+        "title": "6. Notificaciones y Alertas",
+        "body": (
+            "Descripción: Administración de las notificaciones y alertas que recibe el usuario sobre diversas actividades y eventos en la plataforma.\n\n"
+            "Procesos:\n"
+            "- Configuración de Notificaciones: Ajustes de notificaciones por correo, SMS, etc.\n"
+            "- Alertas: Sistema de alertas para transacciones sospechosas o actividades inusuales.\n\n"
+            "Ventajas:\n"
+            "- Información en tiempo real sobre actividades importantes.\n"
+            "- Mejora en la seguridad con alertas sobre actividades sospechosas.\n"
+            "- Personalización de las notificaciones según las preferencias del usuario."
+        )
+    },
+    {
+        "title": "7. Soporte y Ayuda",
+        "body": (
+            "Descripción: Herramientas y recursos para proporcionar soporte a los usuarios, incluyendo un centro de ayuda y soporte en vivo.\n\n"
+            "Procesos:\n"
+            "- Centro de Ayuda: Documentación y guías para resolver problemas comunes.\n"
+            "- Soporte en Vivo: Chat en vivo o sistema de tickets para soporte técnico.\n\n"
+            "Ventajas:\n"
+            "- Mejora en la satisfacción del usuario.\n"
+            "- Resolución rápida de problemas.\n"
+            "- Acceso fácil a recursos de ayuda."
+        )
+    },
+    {
+        "title": "Ventajas Generales del Proyecto Nupay",
+        "body": (
+            "- Escalabilidad: Diseño pensado para crecer junto con el aumento de usuarios y transacciones.\n"
+            "- Seguridad: Implementación de medidas de seguridad robustas para proteger la información de los usuarios.\n"
+            "- Eficiencia: Automatización de procesos clave para mejorar la eficiencia operativa.\n"
+            "- Personalización: Flexibilidad para ajustar la plataforma según las necesidades específicas de la empresa y los usuarios.\n"
+            "- Monitoreo y Control: Herramientas avanzadas para el monitoreo y control de todas las actividades en la plataforma."
+        )
+    }
+]
 
-- **Seller**: El usuario se registra como `seller` proporcionando información personal y de contacto. Tras la autenticación, el `seller` puede acceder a su cuenta para gestionar sus propiedades.
-- **Buyer**: El usuario se registra como `buyer` proporcionando información personal y de contacto. Tras la autenticación, el `buyer` puede explorar y comprar propiedades.
-
-#### 2. **Publicación de Propiedades por el Seller**
-
-1. **Listar Propiedad**:
-   - El `seller` crea una nueva propiedad en la plataforma ingresando detalles como ubicación, precio, descripción, y fotos.
-   - La propiedad es almacenada en la base de datos en la tabla de **Properties**.
-
-2. **Aprobación de Propiedad (si aplica)**:
-   - Un administrador revisa y aprueba la propiedad listada para asegurar que cumple con las políticas de la plataforma.
-   - Una vez aprobada, la propiedad se vuelve visible para los `buyers`.
-
-#### 3. **Exploración y Compra de Propiedades por el Buyer**
-
-1. **Explorar Propiedades**:
-   - El `buyer` navega por la plataforma y explora las propiedades listadas.
-   - Utiliza filtros y búsquedas para encontrar propiedades de interés.
-
-2. **Ver Detalles de Propiedad**:
-   - El `buyer` selecciona una propiedad específica para ver detalles completos, incluyendo descripción, precio, ubicación, y fotos.
-
-3. **Crear Orden de Compra**:
-   - Si el `buyer` decide comprar la propiedad, crea una orden de compra proporcionando detalles del método de pago.
-   - La orden de compra es almacenada en la base de datos en la tabla de **Orders**.
-
-#### 4. **Proceso de Pago y Confirmación**
-
-1. **Procesamiento del Pago**:
-   - El `buyer` completa el proceso de pago utilizando el método de pago seleccionado (tarjeta de crédito, PayPal, criptomoneda).
-   - Los detalles de la transacción son almacenados en la tabla de **OrderDetails**.
-
-2. **Confirmación de la Orden**:
-   - Una vez confirmado el pago, la orden de compra es actualizada a un estado de "completada".
-   - Se genera una entrada en la tabla de **Sales** para registrar la venta.
-
-#### 5. **Finalización de la Venta**
-
-1. **Actualización de Estado**:
-   - La propiedad se actualiza para reflejar que ha sido vendida y ya no está disponible para otros `buyers`.
-
-2. **Notificación**:
-   - El `buyer` y el `seller` reciben notificaciones sobre la finalización de la venta.
-
-3. **Registro en Ventas**:
-   - Los detalles de la venta, incluyendo información del `buyer`, `seller`, propiedad, y transacción, se almacenan en la tabla de **Sales**.
-
-### Relaciones entre las Tablas
-
-- **Properties**:
-  - Cada propiedad tiene un `sellerId` que referencia al `seller` que la listó.
-
-- **Orders**:
-  - Cada orden tiene un `buyerId` que referencia al `buyer` que creó la orden.
-  - Cada orden también tiene un `sellerId` que referencia al `seller` de la propiedad.
-  - Cada orden referencia una propiedad específica con `propertyId`.
-
-- **OrderDetails**:
-  - Cada detalle de orden tiene un `orderId` que referencia a la orden correspondiente.
-  - Cada detalle de orden puede tener referencias a productos específicos (en el caso de propiedades, esto puede incluir detalles adicionales del pago).
-
-- **Sales**:
-  - Cada venta tiene un `buyerId` y `sellerId` que referencian al `buyer` y `seller` involucrados en la transacción.
-  - Cada venta referencia una propiedad específica con `propertyId`.
-  - La venta también incluye detalles de la transacción, como el método de pago y el estado.
-
-### Flujo General
-
-1. **Seller** lista propiedad ➡️ **Properties**.
-2. **Buyer** explora y decide comprar ➡️ **Orders**.
-3. **Buyer** procesa el pago ➡️ **OrderDetails**.
-4. Orden se completa ➡️ **Sales** registra la venta.
-5. Propiedad se marca como vendida ➡️ Notificaciones a `buyer` y `seller`.
-
-Este flujo asegura que cada acción realizada por el `seller` y el `buyer` se registra adecuadamente y se refleja en las tablas correspondientes, manteniendo un seguimiento claro y organizado de todas las transacciones y estados de las propiedades.
-
-
-  // current-user
-  // password
-  // signin
-  // signout
-  // signup

@@ -21,7 +21,7 @@ export class EventMailModule {
       subject: 'Bienvenido a esta APP de NESTJS',
       template: 'welcome',
       context: {
-        name: user.name,
+        name: user.username,
       },
     });
     //Enviar email

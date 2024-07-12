@@ -9,8 +9,8 @@ services:
     ports:
       - 3000:3000
     environment:
-      - DB_URI=mongodb://mongo/curso_nestjs
-      - JWT_SECRET=1111
+      - DB_URI=mongodb://mongo/db_nupay
+      - JWT_SECRET=mamasita.com
     depends_on:
       - mongo
     links:

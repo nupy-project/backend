@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
@@ -11,14 +12,18 @@ import { LoginAuthDto } from './dto/login-auth.dto';
 import { CloudinaryService } from 'src/shared/modules/cloudinary.service';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { SessionDocument, SessionModel } from '../user/models/session.schema';
+import { AuthModel,AuthDocument } from './model/auth.scheme';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel(UserModel.name) private readonly userModel: Model<UserDocument>,
     @InjectModel(SessionModel.name) private readonly sessionModel: Model<SessionDocument>,
-    private readonly cloudinaryService: CloudinaryService,
+    @InjectModel(AuthModel.name) private readonly authModel: Model<AuthDocument>,
+    private readonly cloudinaryService: CloudinaryService, // Inyectar el servicio de Cloudinary
     private readonly jwtService: JwtService,
+
+
   ) {}
   private blacklist: Set<string> = new Set();
 
@@ -26,16 +31,18 @@ export class AuthService {
     const { email, password } = userLoginBody;
 
     try {
+      // Verificar que email y password están definidos
       if (!email || !password) {
         throw new HttpException('Email and password are required', HttpStatus.BAD_REQUEST);
       }
 
-      const userExist = await this.userModel.findOne({ email });
+      const userExist = await this.authModel.findOne({ email });
 
       if (!userExist) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
 
+      // Verificar que la contraseña está definida en el usuario
       if (!userExist.password) {
         throw new HttpException('Password not set for this user', HttpStatus.BAD_REQUEST);
       }
@@ -59,93 +66,38 @@ export class AuthService {
       throw new HttpException(error.message, error.status || HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
-  // public async register(userBody: RegisterAuthDto) {
-  //   const { password, email, fullname, terminos, profilePicture, mobile } = userBody;
-  //   const hashedPassword = await generateHash(password);
-
-  //   const userParse = {
-  //     email,
-  //     fullname,
-  //     password: hashedPassword,
-  //     terminos,
-  //     profilePicture: profilePicture || 'https://placehold.co/330x220?text=Profile+Image',
-  //     mobile,
-  //     isEmailVerified: false,
-  //   };
-
-  //   const existingUser = await this.userModel.findOne({ email });
-  //   if (existingUser) {
-  //     throw new HttpException('EMAIL_ALREADY_EXISTS', HttpStatus.CONFLICT);
-  //   }
-
-  //   const newUser = await this.userModel.create(userParse);
-
-  //   let walletAddress: string;
-  //   let walletPrivateKey: string;
-
-  //   try {
-  //     const wallet = ethers.Wallet.createRandom();
-  //     walletAddress = wallet.address;
-  //     walletPrivateKey = wallet.privateKey;
-  //   } catch (error) {
-  //     console.log(error);
-  //     walletAddress = `pseudo_${Math.random().toString(36).substring(2, 15)}`;
-  //     walletPrivateKey = `pseudo_${Math.random().toString(36).substring(2, 15)}`;
-  //   }
-
-  //   newUser.walletAddress = walletAddress;
-  //   newUser.walletPrivateKey = walletPrivateKey;
-
-  //   await newUser.save();
-
-  //   const payload = { id: newUser._id, roles: [UserRole.USER] };
-  //   const token = this.jwtService.sign(payload);
-
-  //   return { user: newUser, token };
-  // }
   public async register(userBody: RegisterAuthDto) {
-    const { password, email, fullname, lastname, countryCode, terminos, profilePicture, mobile } = userBody;
+    const { password, email, fullname, terminos, profilePicture, mobile } = userBody;
     const hashedPassword = await generateHash(password);
-
-    const userParse = {
+  
+    const authParse = {
       email,
       fullname,
-      lastname,
-      countryCode,
       password: hashedPassword,
       terminos,
       profilePicture: profilePicture || 'https://placehold.co/330x220?text=Profile+Image',
       mobile,
       isEmailVerified: false,
-      roles: [UserRole.USER],
-      username: '', // valor por defecto, puedes cambiarlo
-      country: '', // valor por defecto, puedes cambiarlo
-      browserName: '', // valor por defecto, puedes cambiarlo
-      deviceType: '', // valor por defecto, puedes cambiarlo
-      emailVerificationToken: '', // valor por defecto, puedes cambiarlo
-      refreshToken: '', // valor por defecto, puedes cambiarlo
-      company: '', // valor por defecto, puedes cambiarlo
-      contactPhone: '', // valor por defecto, puedes cambiarlo
-      companySite: '', // valor por defecto, puedes cambiarlo
-      communication: [], // valor por defecto, puedes cambiarlo
-      allowChanges: false, // valor por defecto, puedes cambiarlo
-      language: '', // valor por defecto, puedes cambiarlo
-      timeZone: '', // valor por defecto, puedes cambiarlo
-      currency: '', // valor por defecto, puedes cambiarlo
-      allowMarketing: false, // valor por defecto, puedes cambiarlo
     };
-
-    const existingUser = await this.userModel.findOne({ email });
-    if (existingUser) {
+  
+    const existingAuth = await this.authModel.findOne({ email });
+    if (existingAuth) {
       throw new HttpException('EMAIL_ALREADY_EXISTS', HttpStatus.CONFLICT);
     }
-
+  
+    const newAuth = await this.authModel.create(authParse);
+  
+    const userParse = {
+      email,
+      fullname,
+      profilePicture: profilePicture || 'https://placehold.co/330x220?text=Profile+Image',
+    };
+  
     const newUser = await this.userModel.create(userParse);
-
+  
     let walletAddress: string;
     let walletPrivateKey: string;
-
+  
     try {
       const wallet = ethers.Wallet.createRandom();
       walletAddress = wallet.address;
@@ -155,27 +107,27 @@ export class AuthService {
       walletAddress = `pseudo_${Math.random().toString(36).substring(2, 15)}`;
       walletPrivateKey = `pseudo_${Math.random().toString(36).substring(2, 15)}`;
     }
-
+  
     newUser.walletAddress = walletAddress;
-    newUser.walletPrivateKey = walletPrivateKey;
-
-    await newUser.save();
-
+    newUser.walletPrivateKey = walletPrivateKey; // Omitir guardar la privateKey si no es necesario
+  
+    await newUser.save(); // Guardar los cambios en el usuario
+  
     const payload = { id: newUser._id, roles: [UserRole.USER] };
     const token = this.jwtService.sign(payload);
-
+  
     return { user: newUser, token };
   }
   public async currentUser(token: string) {
     try {
       const decodedToken = this.jwtService.verify(token);
       const userId = decodedToken.id;
-
+  
       const user = await this.userModel.findById(userId).select('-password -walletPrivateKey');
       if (!user) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
       }
-
+  
       return user;
     } catch (error) {
       console.error('Error retrieving current user:', error);
@@ -247,24 +199,6 @@ export class AuthService {
       throw new HttpException(error.message || 'Error verifying email', error.status || HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
-  // public async refreshToken(refreshToken: string) {
-  //   try {
-  //     const payload = this.jwtService.verify(refreshToken);
-  //     const user = await this.userModel.findById(payload.id);
-  //     if (!user) {
-  //       throw new HttpException('Invalid refresh token', HttpStatus.UNAUTHORIZED);
-  //     }
-
-  //     const newPayload = { id: user._id, roles: user.roles };
-  //     const newToken = this.jwtService.sign(newPayload);
-
-  //     return { token: newToken };
-  //   } catch (error) {
-  //     console.error('Error refreshing token:', error);
-  //     throw new HttpException(error.message || 'Error refreshing token', error.status || HttpStatus.INTERNAL_SERVER_ERROR);
-  //   }
-  // }
 
   public async refreshToken(refreshToken: string) {
     try {

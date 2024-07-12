@@ -5,7 +5,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JwtHandle, JwtStrategy } from 'src/shared';
 import { UserModel, UserSchema } from '../user/models/user.schema';
-import { Seller, SellerSchema } from '../seller/model/seller.scheme';
+import { CloudinaryModule } from 'src/shared/modules/cloudinary.module';
+import { SessionModel, SessionSchema } from '../user/models/session.schema';
+import { AuthSchema,AuthModel} from './model/auth.scheme';
 
 @Module({
   imports: [
@@ -19,8 +21,11 @@ import { Seller, SellerSchema } from '../seller/model/seller.scheme';
     }),
     MongooseModule.forFeature([
       { name: UserModel.name, schema: UserSchema },
-      { name: Seller.name, schema: SellerSchema }
+      { name: AuthModel.name, schema: AuthSchema },
+      { name: SessionModel.name, schema: SessionSchema },
+
     ]),
+    CloudinaryModule, // Importar el módulo de Cloudinary
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, JwtHandle],

@@ -20,6 +20,12 @@ interface EnvVars {
   PROPERTY_TOKEN_ADDRESS: string;
   ADMIN_WALLET_ADDRESS: string; // Agregado
   ETH_USD_EXCHANGE_RATE: number; // Agregado
+  PAYMENT_CONTRACT_ADDRESS: string;
+
+  CLOUD_NAME: string;
+  CLOUD_API_KEY: string;
+  CLOUD_API_SECRET: string;
+
 }
 
 const envsSchema = joi
@@ -27,20 +33,26 @@ const envsSchema = joi
     PORT: joi.number().required(),
     DATABASE_URL: joi.string().required(),
     JWT_SECRET: joi.string().required(),
-    ETH_RPC_URL: joi.string().required(),
-    CONTRACT_ADDRESS: joi.string().required(),
-    PRIVATE_KEY: joi.string().required(),
-    ACCESS_CONTROL_ADDRESS: joi.string().required(),
-    BUILDING_TOKEN_ADDRESS: joi.string().required(),
-    COMMISSION_MANAGER_ADDRESS: joi.string().required(),
-    CONTRACT_MANAGER_ADDRESS: joi.string().required(),
-    MARKETPLACE_ADDRESS: joi.string().required(),
-    PROPERTY_MARKETPLACE_ADDRESS: joi.string().required(),
-    TOKEN_FACTORY_ADDRESS: joi.string().required(),
-    TRANSACTION_HANDLER_ADDRESS: joi.string().required(),
-    PROPERTY_TOKEN_ADDRESS: joi.string().required(),
-    ADMIN_WALLET_ADDRESS: joi.string().required(), // Agregado
-    ETH_USD_EXCHANGE_RATE: joi.number().required(), // Agregado
+    // ETH_RPC_URL: joi.string().required(),
+    // CONTRACT_ADDRESS: joi.string().required(),
+    // PRIVATE_KEY: joi.string().required(),
+    // ACCESS_CONTROL_ADDRESS: joi.string().required(),
+    // BUILDING_TOKEN_ADDRESS: joi.string().required(),
+    // COMMISSION_MANAGER_ADDRESS: joi.string().required(),
+    // CONTRACT_MANAGER_ADDRESS: joi.string().required(),
+    // MARKETPLACE_ADDRESS: joi.string().required(),
+    // PROPERTY_MARKETPLACE_ADDRESS: joi.string().required(),
+    // TOKEN_FACTORY_ADDRESS: joi.string().required(),
+    // TRANSACTION_HANDLER_ADDRESS: joi.string().required(),
+    // PROPERTY_TOKEN_ADDRESS: joi.string().required(),
+    // ADMIN_WALLET_ADDRESS: joi.string().required(), // Agregado
+    // ETH_USD_EXCHANGE_RATE: joi.number().required(), // Agregado
+    // PAYMENT_CONTRACT_ADDRESS: joi.string().required(),
+
+    CLOUD_NAME: joi.string().required(),
+    CLOUD_API_KEY: joi.string().required(),
+    CLOUD_API_SECRET: joi.string().required(),
+
   })
   .unknown(true);
 
@@ -58,18 +70,24 @@ export const envs = {
   port: envVars.PORT,
   databaseUrl: envVars.DATABASE_URL,
   JWT_SECRET: envVars.JWT_SECRET,
-  ETH_RPC_URL: envVars.ETH_RPC_URL,
-  CONTRACT_ADDRESS: envVars.CONTRACT_ADDRESS,
+  // ETH_RPC_URL: envVars.ETH_RPC_URL,
+  // CONTRACT_ADDRESS: envVars.CONTRACT_ADDRESS,
   PRIVATE_KEY: envVars.PRIVATE_KEY,
-  ACCESS_CONTROL_ADDRESS: envVars.ACCESS_CONTROL_ADDRESS,
-  BUILDING_TOKEN_ADDRESS: envVars.BUILDING_TOKEN_ADDRESS,
-  COMMISSION_MANAGER_ADDRESS: envVars.COMMISSION_MANAGER_ADDRESS,
-  CONTRACT_MANAGER_ADDRESS: envVars.CONTRACT_MANAGER_ADDRESS,
-  MARKETPLACE_ADDRESS: envVars.MARKETPLACE_ADDRESS,
-  PROPERTY_MARKETPLACE_ADDRESS: envVars.PROPERTY_MARKETPLACE_ADDRESS,
-  TOKEN_FACTORY_ADDRESS: envVars.TOKEN_FACTORY_ADDRESS,
-  TRANSACTION_HANDLER_ADDRESS: envVars.TRANSACTION_HANDLER_ADDRESS,
-  PROPERTY_TOKEN_ADDRESS: envVars.PROPERTY_TOKEN_ADDRESS,
-  ADMIN_WALLET_ADDRESS: envVars.ADMIN_WALLET_ADDRESS, // Agregado
-  ETH_USD_EXCHANGE_RATE: envVars.ETH_USD_EXCHANGE_RATE, // Agregado
+  // ACCESS_CONTROL_ADDRESS: envVars.ACCESS_CONTROL_ADDRESS,
+  // BUILDING_TOKEN_ADDRESS: envVars.BUILDING_TOKEN_ADDRESS,
+  // COMMISSION_MANAGER_ADDRESS: envVars.COMMISSION_MANAGER_ADDRESS,
+  // CONTRACT_MANAGER_ADDRESS: envVars.CONTRACT_MANAGER_ADDRESS,
+  // MARKETPLACE_ADDRESS: envVars.MARKETPLACE_ADDRESS,
+  // PROPERTY_MARKETPLACE_ADDRESS: envVars.PROPERTY_MARKETPLACE_ADDRESS,
+  // TOKEN_FACTORY_ADDRESS: envVars.TOKEN_FACTORY_ADDRESS,
+  // TRANSACTION_HANDLER_ADDRESS: envVars.TRANSACTION_HANDLER_ADDRESS,
+  // PROPERTY_TOKEN_ADDRESS: envVars.PROPERTY_TOKEN_ADDRESS,
+  // ADMIN_WALLET_ADDRESS: envVars.ADMIN_WALLET_ADDRESS, // Agregado
+  // ETH_USD_EXCHANGE_RATE: envVars.ETH_USD_EXCHANGE_RATE, // Agregado
+  // PAYMENT_CONTRACT_ADDRESS: envVars.PAYMENT_CONTRACT_ADDRESS,
+
+  CLOUD_NAME: envVars.CLOUD_NAME,
+  CLOUD_API_KEY: envVars.CLOUD_API_KEY,
+  CLOUD_API_SECRET: envVars.CLOUD_API_SECRET,
+
 };

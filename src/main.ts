@@ -23,6 +23,8 @@ async function bootstrap() {
     .setTitle('API WHILABELL')
     .setDescription('DESCRPCION')
     .addTag('auth')
+    .addTag('payments')
+    .addTag('users')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
