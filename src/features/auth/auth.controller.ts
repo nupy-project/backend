@@ -16,14 +16,14 @@ export class AuthController {
   @Post('login')
   
   handleLogin(@Body() loginBody: LoginAuthDto) {
-    console.log('Datos recibidos en /auth/signin:', loginBody); // Añade esta línea
+    // console.log('Datos recibidos en /auth/signin:', loginBody); // Añade esta línea
 
     return this.authService.login(loginBody);
   }
 
   @Post('register')
   registerSuperAdmin(@Body() registerBody: RegisterAuthDto) {
-    console.log('Datos recibidos en /auth/register:', registerBody); // Añade esta línea
+    // console.log('Datos recibidos en /auth/register:', registerBody); // Añade esta línea
 
     return this.authService.register(registerBody);
   }
