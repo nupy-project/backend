@@ -1,10 +1,9 @@
-integracion pendiente roles  super_admin
-pages: document pendiente: roles adon, routes, enpoiint
+integracion pendiente roles [ super_admin]
+pages: document pendiente: roles adon
 
 
-Entendido, eliminemos el módulo de Productos y Servicios del backend. Ahora, aquí está la lista revisada de funciones para los módulos necesarios en el backend de Nupay, centrados en las funcionalidades de una pasarela de pagos.
 
-### Módulo de Autenticación y Autorización
+### Módulo de Autenticación y Autorización  [ms-auth]
 1. **Registrar Usuario**: Crear una nueva cuenta de usuario.
 2. **Iniciar Sesión**: Autenticar al usuario y proporcionar un token de acceso.
 3. **Recuperar Contraseña**: Enviar un enlace o código para recuperar la contraseña.
@@ -12,14 +11,14 @@ Entendido, eliminemos el módulo de Productos y Servicios del backend. Ahora, aq
 5. **Validar Token JWT**: Verificar la validez de un token JWT.
 6. **Gestionar Roles y Permisos**: Asignar y modificar roles y permisos de usuarios.
 
-### Módulo de Usuarios
+### Módulo de Usuarios  [ms-auth]
 1. **Obtener Perfil de Usuario**: Recuperar la información del perfil de usuario.
 2. **Actualizar Perfil de Usuario**: Modificar la información personal del usuario.
 3. **Eliminar Cuenta de Usuario**: Eliminar la cuenta del usuario y sus datos asociados.
 4. **Listar Usuarios**: Obtener una lista de todos los usuarios (con paginación).
 5. **Buscar Usuario**: Buscar usuarios por criterios específicos (nombre, email, etc.).
 
-### Módulo de Pagos
+### Módulo de Pagos  [ms-payment] [rol:adin, super admin, super admin admin]
 1. **Procesar Pago**: Iniciar y completar una transacción de pago.
 2. **Confirmar Pago**: Confirmar que un pago ha sido procesado exitosamente.
 3. **Cancelar Pago**: Cancelar una transacción de pago pendiente.
@@ -30,14 +29,13 @@ Entendido, eliminemos el módulo de Productos y Servicios del backend. Ahora, aq
 8. **Validar Pagos**: Verificar la autenticidad y validez de los pagos.
 9. **Monitorear Estado de Pagos**: Supervisar el estado y flujo de las transacciones.
 
-### Módulo de Vendedores
-1. **Registrar Vendedor**: Crear una nueva cuenta de vendedor.
-2. **Actualizar Perfil de Vendedor**: Modificar la información del perfil del vendedor.
-3. **Listar Vendedores**: Obtener una lista de todos los vendedores (con paginación).
-4. **Obtener Detalles de Vendedor**: Recuperar la información de un vendedor específico.
-5. **Eliminar Vendedor**: Eliminar la cuenta de un vendedor y sus datos asociados.
-6. **Configurar Métodos de Pago**: Establecer las opciones de pago que los vendedores aceptan.
-7. **Gestionar Fondos**: Administrar los fondos disponibles para retiro por parte de los vendedores.
+### Módulo de Reportes y Analítica
+1. **Generar Reporte de Ventas**: Crear un reporte de ventas para un período específico.
+2. **Generar Reporte de Transacciones**: Crear un reporte de transacciones realizadas.
+3. **Generar Reporte de Usuarios**: Crear un reporte de actividad de usuarios.
+4. **Visualizar Estadísticas**: Mostrar estadísticas y gráficos de rendimiento.
+5. **Exportar Datos**: Permitir la exportación de datos en diferentes formatos (CSV, Excel, PDF).
+
 
 ### Módulo de Notificaciones
 1. **Enviar Notificación**: Enviar una notificación al usuario (email, SMS, push).
@@ -45,12 +43,7 @@ Entendido, eliminemos el módulo de Productos y Servicios del backend. Ahora, aq
 3. **Listar Notificaciones**: Obtener una lista de notificaciones enviadas.
 4. **Obtener Detalle de Notificación**: Recuperar detalles de una notificación específica.
 
-### Módulo de Reportes y Analítica
-1. **Generar Reporte de Ventas**: Crear un reporte de ventas para un período específico.
-2. **Generar Reporte de Transacciones**: Crear un reporte de transacciones realizadas.
-3. **Generar Reporte de Usuarios**: Crear un reporte de actividad de usuarios.
-4. **Visualizar Estadísticas**: Mostrar estadísticas y gráficos de rendimiento.
-5. **Exportar Datos**: Permitir la exportación de datos en diferentes formatos (CSV, Excel, PDF).
+
 
 ### Módulo de Soporte al Cliente
 1. **Crear Ticket de Soporte**: Generar un nuevo ticket de soporte.

@@ -6,21 +6,21 @@ interface EnvVars {
   PORT: number;
   DATABASE_URL: string;
   JWT_SECRET: string;
-  ETH_RPC_URL: string;
-  CONTRACT_ADDRESS: string;
+  // ETH_RPC_URL: string;
+  // CONTRACT_ADDRESS: string;
   PRIVATE_KEY: string;
-  ACCESS_CONTROL_ADDRESS: string;
-  BUILDING_TOKEN_ADDRESS: string;
-  COMMISSION_MANAGER_ADDRESS: string;
-  CONTRACT_MANAGER_ADDRESS: string;
-  MARKETPLACE_ADDRESS: string;
-  PROPERTY_MARKETPLACE_ADDRESS: string;
-  TOKEN_FACTORY_ADDRESS: string;
-  TRANSACTION_HANDLER_ADDRESS: string;
-  PROPERTY_TOKEN_ADDRESS: string;
-  ADMIN_WALLET_ADDRESS: string; // Agregado
-  ETH_USD_EXCHANGE_RATE: number; // Agregado
-  PAYMENT_CONTRACT_ADDRESS: string;
+  // ACCESS_CONTROL_ADDRESS: string;
+  // BUILDING_TOKEN_ADDRESS: string;
+  // COMMISSION_MANAGER_ADDRESS: string;
+  // CONTRACT_MANAGER_ADDRESS: string;
+  // MARKETPLACE_ADDRESS: string;
+  // PROPERTY_MARKETPLACE_ADDRESS: string;
+  // TOKEN_FACTORY_ADDRESS: string;
+  // TRANSACTION_HANDLER_ADDRESS: string;
+  // PROPERTY_TOKEN_ADDRESS: string;
+  // ADMIN_WALLET_ADDRESS: string; // Agregado
+  // ETH_USD_EXCHANGE_RATE: number; // Agregado
+  // PAYMENT_CONTRACT_ADDRESS: string;
 
   CLOUD_NAME: string;
   CLOUD_API_KEY: string;
